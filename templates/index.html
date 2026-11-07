@@ -225,7 +225,9 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
 .pic img,.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s,transform 6s}
 .pic img.on,.ph img.on{opacity:1}
 .dc:hover .pic img{transform:scale(1.08)}
-.hp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.hp{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-top:18px}
+.ph.big{grid-row:span 2;aspect-ratio:auto;min-height:230px}
+.ph figcaption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:38px 14px 12px;color:#fff;font-family:var(--serif);font-weight:700;font-size:1.15rem;line-height:1.2;background:linear-gradient(transparent,rgba(7,29,38,.92))}
 .ph{position:relative;aspect-ratio:4/3;border-radius:6px 16px 6px 16px;overflow:hidden;background:linear-gradient(135deg,var(--lake2),var(--crocus))}
 .hnote{margin:8px 0 0;font-size:.74rem;color:var(--muted)}
 </style>
@@ -495,11 +497,21 @@ g("hotel-form").addEventListener("submit",()=>{
 
 
 /* ---------- Destination photos (Wikimedia Commons, matched by title) ---------- */
-const DQ={"Baramulla (Gulmarg)":["Gulmarg","gulmarg"],"Srinagar":["Srinagar Dal Lake","dal|srinagar"],"Anantnag (Pahalgam)":["Pahalgam","pahalgam|lidder|betaab"],"Ganderbal (Sonamarg)":["Sonamarg","sonamarg|sonmarg|thajiwas"],"Shopian (Peer Ki Gali)":["Peer Ki Gali Mughal Road","peer|shopian|mughal"],"Kupwara (Lolab & Keran)":["Lolab valley Kupwara","lolab|kupwara|keran"],"Kulgam (Aharbal)":["Aharbal waterfall","aharbal|kulgam"],"Bandipora (Gurez Valley)":["Gurez valley","gurez|bandipora|habba"],"Pulwama (Tral & Shikargah)":["Tral Pulwama","tral|pulwama|shikargah"],"Budgam (Yusmarg & Doodhpathri)":["Yusmarg Doodhpathri","yusmarg|doodhpathri|budgam"]};
+const DQ={
+"Baramulla (Gulmarg)":[["Gulmarg","gulmarg"],["Gulmarg snow","gulmarg|snow"]],
+"Srinagar":[["Srinagar Dal Lake","dal|srinagar"],["Srinagar Kashmir","srinagar"]],
+"Anantnag (Pahalgam)":[["Pahalgam","pahalgam|lidder|betaab"],["Anantnag Kashmir","anantnag|pahalgam"]],
+"Ganderbal (Sonamarg)":[["Sonamarg","sonamarg|sonmarg|thajiwas"],["Ganderbal Kashmir","ganderbal|sonamarg"]],
+"Shopian (Peer Ki Gali)":[["Peer Ki Gali","peer|shopian|mughal"],["Mughal Road Kashmir","mughal|peer|shopian"]],
+"Kupwara (Lolab & Keran)":[["Lolab valley","lolab|kupwara|keran"],["Kupwara Kashmir","kupwara|lolab|keran"]],
+"Kulgam (Aharbal)":[["Aharbal waterfall","aharbal|kulgam"],["Kulgam Kashmir","kulgam|aharbal"]],
+"Bandipora (Gurez Valley)":[["Gurez valley","gurez|bandipora|habba"],["Bandipora Wular","bandipora|wular|gurez"]],
+"Pulwama (Tral & Shikargah)":[["Tral Pulwama","tral|pulwama|shikargah"],["Pulwama Kashmir","pulwama|tral"]],
+"Budgam (Yusmarg & Doodhpathri)":[["Yusmarg","yus|yous|budgam"],["Doodhpathri","doodh|dudh|budgam"],["Dudhpathri Budgam","dudh|doodh|budgam"],["Yousmarg Kashmir meadow","yous|yus|doodh|budgam"]]};
+function chain(list,w,i){i=i||0;if(i>=list.length)return Promise.resolve(null);return findPhoto(list[i][0],list[i][1],w).then(p=>p||chain(list,w,i+1))}
 (function(){
   document.querySelectorAll(".dc").forEach(b=>{
-    const [q,m]=DQ[b.dataset.v];
-    findPhoto(q,m,600).then(p=>{if(!p)return;loadImg(p,im=>{im.alt=q;b.querySelector(".pic").appendChild(im);requestAnimationFrame(()=>im.classList.add("on"));addCredit(q,p)})});
+    chain(DQ[b.dataset.v],600).then(p=>{if(!p)return;loadImg(p,im=>{im.alt=b.dataset.v;b.querySelector(".pic").appendChild(im);requestAnimationFrame(()=>im.classList.add("on"));addCredit(b.dataset.v.split(" (")[0],p)})});
   });
 })();
 
@@ -512,12 +524,14 @@ function hotelPhotos(name){
   const type=(name.match(/houseboat|homestay|resort|cottage|bungalow/i)||["hotel"])[0].toLowerCase();
   const hp=g("hp");hp.innerHTML="";
   const slots=[0,1,2].map(()=>{const d=document.createElement("div");d.className="ph";hp.appendChild(d);return d});
-  const tries=[[base+" Kashmir",re(w1)+"|"+re(base)],[dist+" "+type,re(d1)],[dist+" hotel",re(d1)],["Kashmir "+type,type+"|kashmir"]];
+  slots[0].classList.add("big");slots[0].innerHTML="<figcaption>"+esc(name)+"</figcaption>";
+  const key2=re(base.split(" ").slice(0,2).join(" "));
+  const tries=[[base,key2],[base+" Kashmir",key2],[dist+" "+type,re(d1)],[dist+" hotel",re(d1)],["Kashmir "+type,type+"|kashmir"]];
   Promise.all(tries.map(([q,m])=>findPhoto(q,m,700))).then(r=>{
     const seen=new Set(),out=[];
     r.forEach(p=>{if(p&&!seen.has(p.url)){seen.add(p.url);out.push(p)}});
     out.slice(0,3).forEach((p,i)=>loadImg(p,im=>{im.alt=base;slots[i].appendChild(im);requestAnimationFrame(()=>im.classList.add("on"));addCredit("Stay photo "+(i+1),p)}));
-    g("hnote").textContent=out.length?"Illustrative photos of the area and similar stays from Wikimedia Commons. They may not show this exact property.":"";
+    const exact=r[0]||r[1];g("hnote").textContent=exact?"Photo of the property from Wikimedia Commons.":(out.length?"No public photo of this exact property was found, so these show the area and similar stays (Wikimedia Commons).":"");
   });
 }
 

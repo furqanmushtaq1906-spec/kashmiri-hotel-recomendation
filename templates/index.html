@@ -219,6 +219,15 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
   .tstub::before,.tstub::after{top:-12px;bottom:auto}.tstub::before{left:-12px}.tstub::after{left:auto;right:-12px}
 }
 @media print{.hero,.intro,.formhead,form,.note,footer,#toast,.pbtn{display:none!important}.results .result:first-child{margin:0}}
+
+.pic{position:relative;overflow:hidden}
+.dc svg,.pic{height:96px}
+.pic img,.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s,transform 6s}
+.pic img.on,.ph img.on{opacity:1}
+.dc:hover .pic img{transform:scale(1.08)}
+.hp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.ph{position:relative;aspect-ratio:4/3;border-radius:6px 16px 6px 16px;overflow:hidden;background:linear-gradient(135deg,var(--lake2),var(--crocus))}
+.hnote{margin:8px 0 0;font-size:.74rem;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -252,6 +261,7 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
         <div class="pred" id="pred-text">{{ prediction }}</div>
         <p class="small">Predicted label returned by AI Model</p>
         <div class="tk" id="tk"></div>
+        <div class="hp" id="hp"></div><p class="hnote" id="hnote"></p>
       </div>
       <div class="tstub"><div class="seal">&#10003;</div><button class="pbtn" type="button" onclick="window.print()">Print / Save</button></div>
     </section>
@@ -366,7 +376,7 @@ function scene(k,[h,sn,w]){return '<svg viewBox="0 0 160 100" preserveAspectRati
   Object.keys(DIST).forEach((v,k)=>{
     const m=v.match(/^(.*?) \((.*)\)$/),title=m?m[2]:v,sub=m?m[1]:"Dal Lake";
     const b=document.createElement("button");b.type="button";b.className="dc";b.dataset.v=v;
-    b.innerHTML=scene(k,SC[v])+'<span>'+esc(title)+'<small>'+esc(sub)+'</small></span>';
+    b.innerHTML='<div class="pic">'+scene(k,SC[v])+'</div><span>'+esc(title)+'<small>'+esc(sub)+'</small></span>';
     b.onclick=()=>{sel.value=v;sel.dispatchEvent(new Event("change"))};box.appendChild(b);
   });
   sel.style.display="none";sel.parentNode.insertBefore(box,sel);
@@ -463,10 +473,10 @@ g("hotel-form").addEventListener("submit",()=>{
 (function photos(){
   const credits={};
   const plain=h=>new DOMParser().parseFromString(h||"Unknown","text/html").body.textContent.trim();
-  function find(q,must){
-    const key="kv_"+q;
+  function find(q,must,w){
+    const key="kv_"+q+(w||"");
     try{const c=JSON.parse(sessionStorage.getItem(key));if(c&&c.url)return Promise.resolve(c)}catch(e){}
-    const api="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(q)+"&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=1400&format=json&origin=*";
+    const api="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(q)+"&gsrnamespace=6&gsrlimit=40&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth="+(w||1400)+"&format=json&origin=*";
     return fetch(api).then(r=>r.json()).then(d=>{
       const ok=Object.values((d.query&&d.query.pages)||{}).filter(p=>{const i=p.imageinfo&&p.imageinfo[0];return i&&(!must||new RegExp(must,"i").test(p.title))&&i.mime==="image/jpeg"&&i.width>=1200&&i.width>i.height&&!/map|flag|logo|coat|stamp|poster|diagram|panorama/i.test(p.title)});
       if(!ok.length)return null;
@@ -478,9 +488,38 @@ g("hotel-form").addEventListener("submit",()=>{
   }
   function credit(n,p){credits[n]=p;g("credits").innerHTML="Photos via Wikimedia Commons: "+Object.entries(credits).map(([n,p])=>'<a target="_blank" rel="noopener" href="'+p.page+'">'+n+'</a> ('+p.artist.replace(/</g,"&lt;")+", "+p.lic+")").join("; ")}
   function load(p,done){const im=new Image();im.onload=()=>done(im);im.src=p.url}
+  window.findPhoto=find;window.addCredit=credit;window.loadImg=load;
   find("Dal Lake Srinagar mountains","dal|lake|srinagar").then(p=>{if(!p)return;load(p,()=>{const b=g("hero-bg");b.style.backgroundImage="url('"+p.url+"')";b.classList.add("on");credit("Dal Lake",p)})});
   document.querySelectorAll(".tile").forEach(t=>{find(t.dataset.q,t.dataset.m).then(p=>{if(!p)return;load(p,im=>{im.alt=t.textContent.trim();t.prepend(im);requestAnimationFrame(()=>im.classList.add("on"));credit(t.textContent.trim(),p)})})});
 })();
+
+
+/* ---------- Destination photos (Wikimedia Commons, matched by title) ---------- */
+const DQ={"Baramulla (Gulmarg)":["Gulmarg","gulmarg"],"Srinagar":["Srinagar Dal Lake","dal|srinagar"],"Anantnag (Pahalgam)":["Pahalgam","pahalgam|lidder|betaab"],"Ganderbal (Sonamarg)":["Sonamarg","sonamarg|sonmarg|thajiwas"],"Shopian (Peer Ki Gali)":["Peer Ki Gali Mughal Road","peer|shopian|mughal"],"Kupwara (Lolab & Keran)":["Lolab valley Kupwara","lolab|kupwara|keran"],"Kulgam (Aharbal)":["Aharbal waterfall","aharbal|kulgam"],"Bandipora (Gurez Valley)":["Gurez valley","gurez|bandipora|habba"],"Pulwama (Tral & Shikargah)":["Tral Pulwama","tral|pulwama|shikargah"],"Budgam (Yusmarg & Doodhpathri)":["Yusmarg Doodhpathri","yusmarg|doodhpathri|budgam"]};
+(function(){
+  document.querySelectorAll(".dc").forEach(b=>{
+    const [q,m]=DQ[b.dataset.v];
+    findPhoto(q,m,600).then(p=>{if(!p)return;loadImg(p,im=>{im.alt=q;b.querySelector(".pic").appendChild(im);requestAnimationFrame(()=>im.classList.add("on"));addCredit(q,p)})});
+  });
+})();
+
+/* ---------- Hotel photos shown with the prediction ---------- */
+function hotelPhotos(name){
+  let o=null;try{o=JSON.parse(sessionStorage.getItem("kv_form"))}catch(e){}
+  const re=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const base=name.replace(/\(.*?\)/g,"").trim(),w1=base.split(" ")[0];
+  const dist=o?o.district.replace(/.*\((.*)\)/,"$1"):"Kashmir",d1=dist.split(" ")[0];
+  const type=(name.match(/houseboat|homestay|resort|cottage|bungalow/i)||["hotel"])[0].toLowerCase();
+  const hp=g("hp");hp.innerHTML="";
+  const slots=[0,1,2].map(()=>{const d=document.createElement("div");d.className="ph";hp.appendChild(d);return d});
+  const tries=[[base+" Kashmir",re(w1)+"|"+re(base)],[dist+" "+type,re(d1)],[dist+" hotel",re(d1)],["Kashmir "+type,type+"|kashmir"]];
+  Promise.all(tries.map(([q,m])=>findPhoto(q,m,700))).then(r=>{
+    const seen=new Set(),out=[];
+    r.forEach(p=>{if(p&&!seen.has(p.url)){seen.add(p.url);out.push(p)}});
+    out.slice(0,3).forEach((p,i)=>loadImg(p,im=>{im.alt=base;slots[i].appendChild(im);requestAnimationFrame(()=>im.classList.add("on"));addCredit("Stay photo "+(i+1),p)}));
+    g("hnote").textContent=out.length?"Illustrative photos of the area and similar stays from Wikimedia Commons. They may not show this exact property.":"";
+  });
+}
 
 /* ---------- Scroll reveal ---------- */
 (function(){
@@ -514,7 +553,7 @@ addEventListener("pageshow",e=>{if(e.persisted){g("loader").classList.add("hide"
     }
   }catch(e){}
   box.scrollIntoView({behavior:"smooth",block:"center"});
-  if(box.id==="result-ok")confetti();
+  if(box.id==="result-ok"){confetti();hotelPhotos(pred)}
 })();
 </script>
 </body>

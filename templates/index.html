@@ -6,145 +6,167 @@
 <title>Kashmir Hotel Recommendation | Created by Furqan Mushtaq</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --deep:#08222c; --lake:#0f4c5c; --lake2:#1b6b7d; --snow:#f5f8f9; --mist:#e3ecef; --ink:#10242c; --muted:#5a7079;
-  --saffron:#f0a81c; --crocus:#7a4bb0; --crocus2:#53298a; --chinar:#c2411f; --line:#d5e0e5; --surface:#fff;
-  --ok:#17744a; --err:#c2411f; --serif:"Fraunces",Georgia,serif; --sans:Manrope,"Segoe UI",system-ui,sans-serif;
-}
-@media(prefers-color-scheme:dark){:root{
-  --snow:#071a21; --mist:#0c242d; --ink:#e8f0f3; --muted:#9db3bc; --line:#1e404c; --surface:#0e2a33; --ok:#5eea9a; --err:#ff9477;
-}}
+:root{--deep:#071d26;--lake:#0f4c5c;--lake2:#1b6b7d;--snow:#f4f8f9;--mist:#e1ebee;--ink:#10242c;--muted:#5a7079;--saffron:#f0a81c;--crocus:#7a4bb0;--crocus2:#53298a;--chinar:#c2411f;--line:#d5e0e5;--surface:#fff;--ok:#17744a;--err:#c2411f;--serif:"Fraunces",Georgia,serif;--sans:Manrope,"Segoe UI",system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--snow:#071a21;--mist:#0c242d;--ink:#e8f0f3;--muted:#9db3bc;--line:#1e404c;--surface:#0e2a33;--ok:#5eea9a;--err:#ff9477}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:var(--sans);background:var(--snow);color:var(--ink);line-height:1.6;font-size:16px}
+body{margin:0;font-family:var(--sans);background:var(--snow);color:var(--ink);line-height:1.6}
 .wrap{max-width:1100px;margin:auto;padding:0 20px}
 
 /* HERO */
-.hero{position:relative;min-height:640px;color:#fff;display:flex;align-items:flex-end;overflow:hidden;
-  background:radial-gradient(120% 90% at 70% 0%,#2f7a8c 0%,#12495a 45%,#08222c 100%)}
+.hero{position:relative;min-height:660px;color:#fff;display:flex;align-items:flex-end;overflow:hidden;background:radial-gradient(120% 90% at 70% 0%,#2f7a8c,#12495a 45%,#071d26)}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 55%;opacity:0;transition:opacity 1.6s;transform:scale(1.06);animation:drift 28s ease-in-out infinite alternate}
 .hero-bg.on{opacity:.9}
 @keyframes drift{to{transform:scale(1.14) translateX(-1.5%)}}
-.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,34,44,.7),rgba(8,34,44,.25) 40%,rgba(8,34,44,.92))}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,29,38,.7),rgba(7,29,38,.2) 40%,rgba(7,29,38,.93))}
 #snow{position:absolute;inset:0;z-index:2;width:100%;height:100%;pointer-events:none}
-.hero .wrap{position:relative;z-index:4;padding-bottom:170px;padding-top:40px;width:100%}
+.hero .wrap{position:relative;z-index:4;padding:40px 20px 190px;width:100%}
 .topbar{position:absolute;top:22px;left:20px;right:20px;max-width:1060px;margin:auto;display:flex;justify-content:space-between;align-items:center;z-index:5}
 .brand{font-family:var(--serif);font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:10px}
 .brand svg{width:26px;height:26px;color:var(--saffron)}
 .by{font-size:.82rem;padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px)}
-.by b{color:var(--saffron);font-weight:700}
-.greet{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--saffron);margin:60px 0 8px}
-.hero h1{font-family:var(--serif);font-weight:700;margin:0 0 16px;font-size:clamp(2.6rem,7vw,5.2rem);line-height:1;max-width:800px;letter-spacing:-.02em;text-wrap:balance}
-.hero p.sub{margin:0;max-width:560px;font-size:1.1rem;color:#d9e8ed}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.tags span{font-size:.82rem;padding:5px 13px;border-radius:99px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);backdrop-filter:blur(4px)}
-.cta{display:inline-block;margin-top:28px;background:var(--saffron);color:#2a1d00;font-weight:700;padding:14px 28px;border-radius:99px;text-decoration:none;box-shadow:0 10px 30px rgba(240,168,28,.4);transition:transform .15s}
+.by b{color:var(--saffron)}
+.greet{font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--saffron);margin:60px 0 8px}
+.hero h1{font-family:var(--serif);font-weight:700;margin:0 0 16px;font-size:clamp(2.7rem,7.5vw,5.6rem);line-height:.98;max-width:820px;letter-spacing:-.025em;text-wrap:balance}
+.hero h1 em{font-style:italic;color:var(--saffron);font-weight:500}
+.sub{margin:0;max-width:560px;font-size:1.1rem;color:#d9e8ed}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.stats div{padding:10px 18px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(10px)}
+.stats b{display:block;font-family:var(--serif);font-size:1.4rem;color:var(--saffron);line-height:1.1}
+.stats span{font-size:.78rem;color:#cfe2e8}
+.cta{display:inline-block;margin-top:28px;background:var(--saffron);color:#2a1d00;font-weight:800;padding:15px 30px;border-radius:99px;text-decoration:none;box-shadow:0 10px 30px rgba(240,168,28,.45);transition:transform .15s}
 .cta:hover{transform:translateY(-2px)}
 .ridge{position:absolute;left:0;right:0;bottom:-1px;z-index:3;width:100%;height:150px;display:block}
 
-/* DIVIDER */
 .buta{display:flex;align-items:center;gap:14px;color:var(--saffron);margin:0 0 14px}
 .buta::before,.buta::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
 .buta svg{width:26px;height:26px;flex:none}
 
 /* RESULT */
 main{position:relative;z-index:5;padding-bottom:30px}
-.results .result:first-child{margin-top:-90px}
-.result{margin:0 0 18px;display:flex;gap:22px;align-items:center;background:var(--surface);border-radius:6px 32px 6px 32px;padding:28px 32px;
-  border:2px solid var(--saffron);box-shadow:0 24px 60px rgba(8,34,44,.25);position:relative;overflow:hidden}
-.result::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(var(--saffron),transparent 70%);opacity:.25}
+.results .result:first-child{margin-top:-100px}
+.result{margin:0 0 18px;display:flex;gap:24px;align-items:center;background:var(--surface);border-radius:6px 34px 6px 34px;padding:30px 34px;border:2px solid var(--saffron);box-shadow:0 26px 60px rgba(7,29,38,.28);position:relative;overflow:hidden}
+.result::after{content:"";position:absolute;right:-50px;top:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(var(--saffron),transparent 70%);opacity:.28}
 .result.error{border-color:var(--chinar)}
-.result.hide{display:none}
-.seal{flex:none;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-size:2.1rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--crocus),var(--crocus2));box-shadow:0 0 0 6px rgba(122,75,176,.2);animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
-.error .seal{background:var(--chinar);box-shadow:0 0 0 6px rgba(194,65,31,.2)}
+.hide{display:none!important}
+.seal{flex:none;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-size:2.2rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--crocus),var(--crocus2));box-shadow:0 0 0 7px rgba(122,75,176,.2);animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
+.error .seal{background:var(--chinar);box-shadow:0 0 0 7px rgba(194,65,31,.2)}
 @keyframes pop{from{transform:scale(.4);opacity:0}}
-.result h2{margin:0;font-size:.95rem;font-weight:600;color:var(--muted)}
+.result h2{margin:0;font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .pred{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,3rem);font-weight:700;line-height:1.15;color:var(--ok);overflow-wrap:anywhere}
-.error .pred{color:var(--err);font-size:1.25rem;font-family:var(--sans);font-weight:600}
+.error .pred{color:var(--err);font-size:1.25rem;font-family:var(--sans);font-weight:700}
 .small{margin:2px 0 0;color:var(--muted);font-size:.88rem}
 
-/* INTRO + GALLERY */
-.intro{padding:50px 0 10px}
+/* INTRO */
+.intro{padding:54px 0 10px}
 h2.title{font-family:var(--serif);font-size:clamp(1.9rem,4.2vw,2.8rem);margin:0 0 8px;text-align:center;letter-spacing:-.01em;text-wrap:balance}
 p.lead{max-width:620px;margin:0 auto 28px;text-align:center;color:var(--muted)}
 .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:210px 210px;gap:12px}
-.tile{margin:0;position:relative;min-width:0;border-radius:6px 26px 6px 26px;overflow:hidden;background:linear-gradient(135deg,var(--lake2),var(--crocus));min-height:140px;box-shadow:0 10px 26px rgba(8,34,44,.15)}
+.tile{margin:0;position:relative;min-width:0;border-radius:6px 28px 6px 28px;overflow:hidden;background:linear-gradient(135deg,var(--lake2),var(--crocus));min-height:140px;box-shadow:0 10px 26px rgba(7,29,38,.15)}
 .tile:first-child{grid-row:span 2}
 .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s,transform 6s}
 .tile img.on{opacity:1}
 .tile:hover img{transform:scale(1.07)}
-.tile figcaption{line-height:1.15;position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-family:var(--serif);font-size:1.25rem;font-weight:600;background:linear-gradient(transparent,rgba(8,34,44,.88))}
+.tile figcaption{line-height:1.15;position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-family:var(--serif);font-size:1.25rem;font-weight:600;background:linear-gradient(transparent,rgba(7,29,38,.9))}
 
-/* STEPS */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);margin:34px 0 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.step{padding:18px 22px;border-right:1px solid var(--line)}
-.step:last-child{border:0}
-.step strong{font-family:var(--serif);font-size:1.25rem;display:block}
-.step span{color:var(--muted);font-size:.92rem}
+/* QUICK START CARDS */
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 6px}
+.qcard{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:6px 22px 6px 22px;padding:18px 20px;color:var(--ink);position:relative;overflow:hidden;box-shadow:0 8px 22px rgba(7,29,38,.07)}
+.qcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--saffron),var(--crocus))}
+.qcard:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(122,75,176,.22)}
+.qcard b{display:block;font-family:var(--serif);font-size:1.3rem;line-height:1.2}
+.qcard span{font-size:.86rem;color:var(--muted);font-weight:500}
+.qcard em{display:inline-block;margin-top:8px;font-style:normal;font-size:.8rem;color:var(--crocus);font-weight:800}
+.ghost{display:block;margin:12px auto 0;background:transparent;color:var(--muted);padding:8px 16px;border-radius:99px;border:1px solid var(--line)}
 
-/* EXAMPLES */
-.examples{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:26px 0 8px}
 button{font:inherit;cursor:pointer;border:0;font-weight:700;transition:transform .12s,box-shadow .12s,filter .12s}
 button:active{transform:translateY(1px)}
-button:focus-visible,input:focus-visible,select:focus-visible,.cta:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
-.chip{background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:10px 18px;border-radius:99px}
-.chip:hover{border-color:var(--crocus);box-shadow:0 6px 16px rgba(122,75,176,.22)}
-.chip.ghost{background:transparent;color:var(--muted)}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
 
 /* FORM */
-.formhead{padding-top:40px}
-fieldset{margin:0 0 24px;padding:0;background:var(--surface);border-radius:6px 28px 6px 28px;border:1px solid var(--line);overflow:hidden;box-shadow:0 10px 30px rgba(8,34,44,.07)}
-.fhead{display:flex;align-items:center;gap:14px;padding:16px 26px;background:linear-gradient(100deg,var(--deep),var(--lake) 70%,var(--crocus2));color:#fff}
-.fhead svg{width:32px;height:32px;flex:none;color:var(--saffron)}
-.fhead h3{font-family:var(--serif);font-size:1.45rem;margin:0;line-height:1.1}
+.formhead{padding-top:44px}
+fieldset{margin:0 0 24px;padding:0;background:var(--surface);border-radius:6px 30px 6px 30px;border:1px solid var(--line);overflow:hidden;box-shadow:0 12px 34px rgba(7,29,38,.08);min-width:0}
+.fhead{display:flex;align-items:center;gap:14px;padding:18px 26px;color:#fff;position:relative;
+  background:radial-gradient(circle at 20% 50%,rgba(240,168,28,.18) 0 2px,transparent 3px) 0 0/26px 26px,linear-gradient(100deg,var(--deep),var(--lake) 70%,var(--crocus2))}
+.fhead .n{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:1.3rem;font-weight:700;background:var(--saffron);color:#2a1d00}
+.fhead h3{font-family:var(--serif);font-size:1.5rem;margin:0;line-height:1.1}
 .fhead p{margin:0;font-size:.85rem;color:#bcd2da}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 18px;padding:24px 26px 28px}
+.fhead svg{margin-left:auto;width:34px;height:34px;color:var(--saffron);opacity:.9}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 20px;padding:26px}
+.field{min-width:0}
 .field.full{grid-column:1/-1}
-label.l,.lab{display:block;font-size:.85rem;font-weight:700;margin:0 0 7px;color:var(--muted)}
-input[type=number],select{width:100%;font:inherit;color:var(--ink);background:var(--snow);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.field.two{grid-column:span 2}
+.lab{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;font-weight:800;margin:0 0 8px;color:var(--muted)}
+.lab i{font-style:normal;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:rgba(240,168,28,.2);color:#9a6a00}
+@media(prefers-color-scheme:dark){.lab i{color:var(--saffron)}}
+input[type=number],select{width:100%;font:inherit;font-weight:600;color:var(--ink);background:var(--snow);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 input[type=number]:hover,select:hover{border-color:var(--crocus)}
-input[readonly]{opacity:.7;border-style:dashed}
+input[readonly]{opacity:.75;border-style:dashed}
 .ctrl{position:relative}
-.ctrl i{position:absolute;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted);font-size:.88rem;pointer-events:none}
-.ctrl.pre i{left:13px}.ctrl.pre input{padding-left:30px}
-.ctrl.suf i{right:13px}.ctrl.suf input{padding-right:46px}
+.ctrl u{position:absolute;top:50%;transform:translateY(-50%);text-decoration:none;color:var(--muted);font-size:.9rem;pointer-events:none}
+.ctrl.pre u{left:14px}.ctrl.pre input{padding-left:32px}
+.ctrl.suf u{right:14px}.ctrl.suf input{padding-right:48px}
+.hint{margin:6px 0 0;font-size:.78rem;color:var(--muted)}
 .flash{animation:fl .9s}
 @keyframes fl{0%{background:rgba(240,168,28,.4)}100%{background:var(--snow)}}
 
-/* CHOICE CHIPS (radio) */
-.opts{display:flex;flex-wrap:wrap;gap:9px}
+/* STEPPER */
+.cnt{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--snow)}
+.cnt button{width:52px;font-size:1.5rem;background:transparent;color:var(--crocus);font-weight:700}
+.cnt button:hover{background:rgba(122,75,176,.14)}
+.cnt input{border:0!important;border-radius:0;text-align:center;font-size:1.2rem;font-weight:800;background:transparent;padding:12px 0;-moz-appearance:textfield}
+.cnt input::-webkit-outer-spin-button,.cnt input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* RADIO CHIPS */
+.opts{display:flex;flex-wrap:wrap;gap:10px}
 .opt{position:relative}
 .opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
-.opt span{display:block;padding:9px 15px;border-radius:12px;border:1px solid var(--line);background:var(--snow);font-weight:600;font-size:.92rem;line-height:1.25;transition:all .15s}
-.opt span small{display:block;font-weight:500;font-size:.75rem;color:var(--muted)}
-.opt:hover span{border-color:var(--crocus)}
-.opt input:checked+span{background:linear-gradient(135deg,var(--crocus),var(--crocus2));border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(122,75,176,.35)}
+.opt span{display:block;padding:10px 16px;border-radius:14px;border:1px solid var(--line);background:var(--snow);font-weight:700;font-size:.92rem;line-height:1.25;transition:all .15s}
+.opt span small{display:block;font-weight:500;font-size:.74rem;color:var(--muted)}
+.opt:hover span{border-color:var(--crocus);transform:translateY(-1px)}
+.opt input:checked+span{background:linear-gradient(135deg,var(--crocus),var(--crocus2));border-color:transparent;color:#fff;box-shadow:0 8px 18px rgba(122,75,176,.38)}
 .opt input:checked+span small{color:#e2d4f3}
 .opt input:focus-visible+span{outline:3px solid var(--saffron);outline-offset:2px}
 
-.bar{position:sticky;bottom:12px;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
-  background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:12px 16px;box-shadow:0 10px 30px rgba(8,34,44,.2)}
-.go{background:linear-gradient(135deg,var(--crocus),var(--crocus2));color:#fff;padding:15px 34px;border-radius:99px;font-size:1.05rem;box-shadow:0 10px 24px rgba(122,75,176,.4)}
+/* BUDGET SLIDER */
+input[type=range]{width:100%;height:8px;margin:18px 0 6px;accent-color:var(--crocus);cursor:pointer}
+.qb{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.qb button{background:var(--snow);color:var(--ink);border:1px solid var(--line);padding:6px 14px;border-radius:99px;font-size:.85rem}
+.qb button:hover{border-color:var(--saffron);background:rgba(240,168,28,.15)}
+
+/* BAR */
+.bar{position:sticky;bottom:12px;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:22px;padding:12px 14px 12px 22px;box-shadow:0 14px 34px rgba(7,29,38,.25)}
+.sum{font-size:.92rem;font-weight:700}
+.sum small{display:block;font-weight:500;color:var(--muted);font-size:.78rem}
+.go{background:linear-gradient(135deg,var(--crocus),var(--crocus2));color:#fff;padding:16px 36px;border-radius:99px;font-size:1.08rem;box-shadow:0 10px 24px rgba(122,75,176,.45)}
 .go:hover{filter:brightness(1.12)}
 .go[disabled]{opacity:.7;cursor:wait}
 .note{margin:18px 0 0;color:var(--muted);font-size:.85rem;text-align:center}
 
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:50;background:rgba(7,29,38,.88);backdrop-filter:blur(6px);display:grid;place-items:center;text-align:center;color:#fff}
+#loader p{font-family:var(--serif);font-size:1.5rem;margin:16px 0 0}
+.spin{width:64px;height:64px;margin:auto;border-radius:50%;border:5px solid rgba(255,255,255,.2);border-top-color:var(--saffron);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
 /* FOOTER */
-footer{position:relative;background:var(--deep);color:#b9ced6;text-align:center;padding:46px 20px 40px;font-size:.9rem;overflow:hidden}
+footer{position:relative;background:var(--deep);color:#b9ced6;text-align:center;padding:48px 20px 40px;font-size:.9rem;overflow:hidden}
 footer::before{content:"";position:absolute;left:50%;top:-120px;width:520px;height:240px;transform:translateX(-50%);background:radial-gradient(var(--saffron),transparent 70%);opacity:.18}
 footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#fff;font-weight:600;display:block;margin-bottom:6px}
 .sign{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 22px;border-radius:99px;border:1px solid rgba(240,168,28,.5);background:rgba(240,168,28,.08);color:#fff}
 .sign svg{width:18px;height:18px;color:var(--saffron)}
-.sign strong{font-family:var(--serif);font-size:1.15rem;color:var(--saffron);letter-spacing:.02em}
+.sign strong{font-family:var(--serif);font-size:1.15rem;color:var(--saffron)}
 #credits{display:block;margin-top:16px;font-size:.76rem;opacity:.75}
 #credits a{color:var(--saffron)}
-#toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,16px);background:var(--deep);color:#fff;padding:10px 20px;border-radius:99px;font-size:.88rem;opacity:0;pointer-events:none;transition:.25s;z-index:20;border:1px solid var(--saffron)}
+#toast{position:fixed;left:50%;bottom:100px;transform:translate(-50%,16px);background:var(--deep);color:#fff;padding:10px 20px;border-radius:99px;font-size:.88rem;opacity:0;pointer-events:none;transition:.25s;z-index:20;border:1px solid var(--saffron)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .field.two{grid-column:1/-1}
+  .quick{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 150px 150px}
   .tile:first-child{grid-row:auto;grid-column:span 2}
 }
@@ -152,14 +174,13 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
   .gallery{grid-template-rows:190px 130px 130px;gap:10px}
   .tile{min-height:0}
   .tile figcaption{font-size:1rem;padding:22px 10px 8px}
-  .hero{min-height:580px}.hero .wrap{padding-bottom:130px}
+  .hero{min-height:600px}.hero .wrap{padding-bottom:140px}
   .by{display:none}
   .grid{grid-template-columns:1fr;padding:18px}
-  .steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border:0}
   .result{flex-direction:column;align-items:flex-start;padding:22px}
   input,select{font-size:16px}
-  .chip{flex:1 1 100%}.go{width:100%}
-  .bar .left{display:none}
+  .fhead{padding:14px 18px}.fhead svg{display:none}
+  .go{width:100%}.bar{padding:12px}.sum{width:100%;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}#snow{display:none}}
 </style>
@@ -175,9 +196,9 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
   </div>
   <div class="wrap">
     <p class="greet">Khush amdeed &middot; Welcome to Kashmir</p>
-    <h1>Find your stay in the Valley</h1>
-    <p class="sub">Tell us about your trip, budget and the kind of place you love. Our decision-tree model will suggest the hotel that fits you best.</p>
-    <div class="tags"><span>Machine Learning</span><span>Decision Tree</span><span>Flask + scikit-learn</span></div>
+    <h1>Find your <em>perfect stay</em> in the Valley</h1>
+    <p class="sub">Answer a few simple questions. Our decision-tree model will suggest the hotel that fits your trip.</p>
+    <div class="stats"><div><b>10</b><span>Districts</span></div><div><b>13</b><span>Inputs, most auto-filled</span></div><div><b>1 tap</b><span>Sample trips</span></div></div>
     <a class="cta" href="#plan">Plan my trip</a>
   </div>
   <svg class="ridge" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true">
@@ -188,7 +209,6 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
 
 <main class="wrap">
 
-  <!-- Both boxes stay hidden until Flask fills in a value (see script at the bottom) -->
   <div class="results">
     <section class="result hide" id="result-ok" role="status">
       <div class="seal">&#10003;</div>
@@ -198,7 +218,6 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
         <p class="small">Predicted label returned by AI Model</p>
       </div>
     </section>
-
     <section class="result error hide" id="result-err" role="alert">
       <div class="seal">!</div>
       <div>
@@ -212,7 +231,7 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
   <section class="intro">
     <div class="buta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg></div>
     <h2 class="title">Houseboats, cottages and snow-lit ridges</h2>
-    <p class="lead">From shikaras on Dal Lake to the meadows of Gulmarg, every stay in Kashmir has a story. Pick a sample below or enter your own details.</p>
+    <p class="lead">From shikaras on Dal Lake to the meadows of Gulmarg, every stay in Kashmir has a story.</p>
     <div class="gallery">
       <figure class="tile" data-q="Dal Lake Srinagar shikara"><figcaption>Dal Lake</figcaption></figure>
       <figure class="tile" data-q="Gulmarg snow mountains"><figcaption>Gulmarg</figcaption></figure>
@@ -220,26 +239,21 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
       <figure class="tile" data-q="Shalimar Bagh Srinagar"><figcaption>Mughal gardens</figcaption></figure>
       <figure class="tile" data-q="Pahalgam Lidder valley"><figcaption>Pahalgam</figcaption></figure>
     </div>
-    <div class="steps">
-      <div class="step"><strong>Choose a sample</strong><span>Load an example or type your own values.</span></div>
-      <div class="step"><strong>Check the details</strong><span>Edit any of the four sections below.</span></div>
-      <div class="step"><strong>Get your hotel</strong><span>Flask sends the data to the model and shows the label.</span></div>
+    <div class="quick">
+      <button class="qcard" type="button" onclick="loadExample(0)"><b>Gulmarg ski trip</b><span>4 adults &middot; 2 nights &middot; winter snow</span><br><em>Use this sample &rarr;</em></button>
+      <button class="qcard" type="button" onclick="loadExample(1)"><b>Srinagar long stay</b><span>3 adults &middot; 9 nights &middot; nature retreat</span><br><em>Use this sample &rarr;</em></button>
+      <button class="qcard" type="button" onclick="loadExample(2)"><b>Pahalgam family trip</b><span>4 adults + 1 child &middot; 7 nights &middot; summer</span><br><em>Use this sample &rarr;</em></button>
     </div>
-    <div class="examples">
-      <button class="chip" type="button" onclick="loadExample(0)">Example 1: Gulmarg ski trip</button>
-      <button class="chip" type="button" onclick="loadExample(1)">Example 2: Srinagar long stay</button>
-      <button class="chip" type="button" onclick="loadExample(2)">Example 3: Pahalgam family trip</button>
-      <button class="chip ghost" type="button" onclick="resetForm()">Reset form</button>
-    </div>
+    <button class="ghost" type="button" onclick="resetForm()">Reset form</button>
   </section>
 
-  <div class="formhead" id="plan"><div class="buta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg></div><h2 class="title">Plan your trip</h2><p class="lead">Four short sections. Everything marked auto is worked out for you.</p></div>
+  <div class="formhead" id="plan"><div class="buta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg></div><h2 class="title">Plan your trip</h2><p class="lead">Four short steps. Fields marked AUTO are worked out for you.</p></div>
 
   <form id="hotel-form" method="POST" action="">
     <div id="fields"></div>
     <div class="bar">
-      <div class="left"><button class="chip" type="button" onclick="loadExample(0)">Restore example 1</button></div>
-      <button class="go" id="submit-btn" type="submit">Predict my hotel</button>
+      <div class="sum" id="sum">Your trip summary<small>Fill the form to see it here</small></div>
+      <button class="go" id="submit-btn" type="submit">Predict my hotel &rarr;</button>
     </div>
   </form>
   <p class="note">The form sends every field to Flask. Flask encodes the text fields with ohe.pkl and runs the decision tree.</p>
@@ -252,119 +266,137 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
   <span id="credits"></span>
 </footer>
 <div id="toast" role="status"></div>
+<div id="loader" class="hide" role="status"><div><div class="spin"></div><p>Finding your perfect stay...</p></div></div>
 
 <script>
-/* ---------- Form schema (13 features) ---------- */
-const YN=[["1","Yes","View included"],["0","No","No view"]];
+/* ---------- Options ---------- */
+const YN=[["1","Yes","I want a view"],["0","No","Not needed"]];
 const SEASON=[["Snow_Winter_Dec_Feb","Snow winter","Dec to Feb"],["Lush_Monsoon_Jul_Aug","Lush monsoon","Jul to Aug"],["Chinar_Autumn_Sep_Nov","Chinar autumn","Sep to Nov"],["Peak_Summer_May_Jun","Peak summer","May to Jun"],["Tulip_Spring_Mar_Apr","Tulip spring","Mar to Apr"]];
 const PURPOSE=[["Winter_Ski_Adventure","Ski adventure"],["Senior_Leisure_Tour","Senior leisure"],["Family_Vacation","Family vacation"],["Offbeat_Nature_Retreat","Nature retreat"],["Alpine_Trekking","Alpine trekking"],["Honeymoon_Couple","Honeymoon"]];
 const STARS=[["5","5 star"],["4","4 star"],["3","3 star"],["2","2 star"],["1","1 star"],["0","Unrated"]];
-const DIST=["Baramulla (Gulmarg)","Srinagar","Anantnag (Pahalgam)","Ganderbal (Sonamarg)","Shopian (Peer Ki Gali)","Kupwara (Lolab & Keran)","Kulgam (Aharbal)","Bandipora (Gurez Valley)","Pulwama (Tral & Shikargah)","Budgam (Yusmarg & Doodhpathri)"];
-// [id, label, type, extra, default]  type: n=number, s=select, r=radio chips
+// Approximate road distance from Srinagar airport (SXR), auto-filled when a district is picked. You can still edit it.
+const DIST={"Baramulla (Gulmarg)":56.5,"Srinagar":24.2,"Anantnag (Pahalgam)":90,"Ganderbal (Sonamarg)":85,"Shopian (Peer Ki Gali)":80,"Kupwara (Lolab & Keran)":100,"Kulgam (Aharbal)":75,"Bandipora (Gurez Valley)":125,"Pulwama (Tral & Shikargah)":40,"Budgam (Yusmarg & Doodhpathri)":45};
+// [id, label, type, extra, default]  n=number  c=counter  s=select  r=radio chips  b=budget
 const SECTIONS=[
- {t:"1. Your trip",d:"Season, purpose and destination",ic:"M3 19l6-10 4 6 3-4 5 8H3zm14-12a2 2 0 110-4 2 2 0 010 4z",f:[
+ {t:"Your trip",d:"When, why and where",ic:"M3 19l6-10 4 6 3-4 5 8H3zm14-12a2 2 0 110-4 2 2 0 010 4z",f:[
   ["travel_season","Travel season","r",{opts:SEASON,full:1,sel:"Snow_Winter_Dec_Feb"}],["trip_purpose","Trip purpose","r",{opts:PURPOSE,full:1,sel:"Winter_Ski_Adventure"}],
-  ["district","District / destination","s",{opts:DIST}],["stay_days","Stay days","n",{min:1},3]]},
- {t:"2. Group & rooms",d:"Who is travelling",ic:"M12 3l9 5v2H3V8l9-5zm-7 9h2v6H5zm6 0h2v6h-2zm6 0h2v6h-2zM3 20h18v2H3z",f:[
-  ["adults_count","Adults","n",{min:1},2],["children_count","Children","n",{min:0},0],
-  ["family_count","Family / group count (auto)","n",{min:1,ro:1},2],["rooms_required","Rooms required","n",{min:1},1]]},
- {t:"3. Budget",d:"What you plan to spend",ic:"M12 2c3 4 6 6 6 10a6 6 0 01-12 0c0-2 1-3 2-5 1 2 2 2 3 2 0-3 0-5 1-7z",f:[
-  ["user_budget_total_inr","Total budget","n",{pre:"₹",min:0},60000],["user_daily_budget_inr","Daily budget (auto)","n",{pre:"₹",min:0,ro:1},20000]]},
- {t:"4. Stay preferences",d:"Quality, view and distance",ic:"M3 21V9l9-6 9 6v12h-6v-6H9v6H3z",f:[
+  ["district","District / destination","s",{opts:Object.keys(DIST),two:1}],["stay_days","Nights of stay","c",{min:1,max:60},3]]},
+ {t:"Who is travelling",d:"Group size and rooms",ic:"M12 3l9 5v2H3V8l9-5zm-7 9h2v6H5zm6 0h2v6h-2zm6 0h2v6h-2zM3 20h18v2H3z",f:[
+  ["adults_count","Adults","c",{min:1,max:30},2],["children_count","Children","c",{min:0,max:30},0],
+  ["family_count","Total guests","n",{min:1,ro:1,tag:"auto"},2],["rooms_required","Rooms required","c",{min:1,max:15,tag:"auto",hint:"Suggested: 1 room for every 4 guests. Change it if you like."},1]]},
+ {t:"Budget",d:"What you plan to spend",ic:"M12 2c3 4 6 6 6 10a6 6 0 01-12 0c0-2 1-3 2-5 1 2 2 2 3 2 0-3 0-5 1-7z",f:[
+  ["user_budget_total_inr","Total budget","b",{pre:"₹",min:0,two:1},60000],["user_daily_budget_inr","Daily budget","n",{pre:"₹",min:0,ro:1,tag:"auto",hint:"Total budget divided by nights."},20000]]},
+ {t:"Stay preferences",d:"Quality, view and distance",ic:"M3 21V9l9-6 9 6v12h-6v-6H9v6H3z",f:[
   ["star_category","Star category","r",{opts:STARS,full:1,sel:"3"}],
   ["has_mountain_or_lake_view","Mountain / lake view","r",{opts:YN,sel:"1"}],
-  ["distance_to_sxr_airport_km","Distance to SXR airport","n",{suf:"km",min:0},25]]}
+  ["distance_to_sxr_airport_km","Distance to SXR airport","n",{suf:"km",min:0,tag:"auto",hint:"Approximate, filled from your district."},25]]}
 ];
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const g=id=>document.getElementById(id);
 
 (function build(){
-  const root=document.getElementById("fields");
-  SECTIONS.forEach(s=>{
+  const root=g("fields");
+  SECTIONS.forEach((s,k)=>{
     const fs=document.createElement("fieldset");
-    let h='<div class="fhead"><svg viewBox="0 0 24 24" fill="currentColor"><path d="'+s.ic+'"/></svg><div><h3>'+esc(s.t)+'</h3><p>'+s.d+'</p></div></div><div class="grid">';
+    let h='<div class="fhead"><div class="n">'+(k+1)+'</div><div><h3>'+esc(s.t)+'</h3><p>'+s.d+'</p></div><svg viewBox="0 0 24 24" fill="currentColor"><path d="'+s.ic+'"/></svg></div><div class="grid">';
     s.f.forEach(([id,label,type,x,def])=>{
+      const cls='field'+(x.full?' full':'')+(x.two?' two':'');
+      const tag=x.tag?'<i>'+x.tag+'</i>':'';
+      const hint=x.hint?'<p class="hint">'+x.hint+'</p>':'';
       if(type==="r"){
-        h+='<div class="field'+(x.full?' full':'')+'"><span class="lab">'+label+'</span><div class="opts" role="radiogroup" aria-label="'+label+'">'+
+        h+='<div class="'+cls+'"><span class="lab">'+label+'</span><div class="opts" role="radiogroup" aria-label="'+label+'">'+
           x.opts.map(([v,t,sub])=>'<label class="opt"><input type="radio" name="'+id+'" value="'+esc(v)+'"'+(x.sel===v?' checked':'')+' required><span>'+t+(sub?'<small>'+sub+'</small>':'')+'</span></label>').join("")+'</div></div>';
         return;
       }
-      h+='<div class="field"><label class="l" for="'+id+'">'+label+'</label>';
-      if(type==="s"){
-        h+='<select id="'+id+'" name="'+id+'" required>'+x.opts.map(o=>'<option value="'+esc(o)+'">'+esc(o)+'</option>').join("")+'</select>';
-      }else{
-        const inp='<input id="'+id+'" name="'+id+'" type="number" step="'+(x.step||"any")+'"'+(x.min!==undefined?' min="'+x.min+'"':'')+(x.max!==undefined?' max="'+x.max+'"':'')+(x.ro?' readonly':'')+' required value="'+def+'">';
-        h+=(x.pre||x.suf)?'<div class="ctrl '+(x.pre?'pre':'suf')+'"><i>'+(x.pre||x.suf)+'</i>'+inp+'</div>':inp;
-      }
-      h+='</div>';
+      h+='<div class="'+cls+'"><label class="lab" for="'+id+'">'+label+tag+'</label>';
+      const attrs='id="'+id+'" name="'+id+'" type="number" step="any"'+(x.min!==undefined?' min="'+x.min+'"':'')+(x.max!==undefined?' max="'+x.max+'"':'')+(x.ro?' readonly':'')+' required value="'+def+'"';
+      if(type==="s") h+='<select id="'+id+'" name="'+id+'" required>'+x.opts.map(o=>'<option value="'+esc(o)+'">'+esc(o)+'</option>').join("")+'</select>';
+      else if(type==="c") h+='<div class="cnt"><button type="button" data-t="'+id+'" data-d="-1" aria-label="Decrease">&minus;</button><input '+attrs+'><button type="button" data-t="'+id+'" data-d="1" aria-label="Increase">+</button></div>';
+      else if(type==="b") h+='<div class="ctrl pre"><u>₹</u><input '+attrs+'></div><input type="range" id="budget_range" min="10000" max="500000" step="5000" value="'+def+'" aria-label="Budget slider"><div class="qb">'+[30000,60000,100000,200000,300000].map(v=>'<button type="button" data-b="'+v+'">₹'+v.toLocaleString("en-IN")+'</button>').join("")+'</div>';
+      else{const inp='<input '+attrs+'>';h+=(x.pre||x.suf)?'<div class="ctrl '+(x.pre?'pre':'suf')+'"><u>'+(x.pre||x.suf)+'</u>'+inp+'</div>':inp}
+      h+=hint+'</div>';
     });
     fs.innerHTML=h+'</div>';
     root.appendChild(fs);
   });
 })();
 
-/* ---------- Auto-calculated fields ---------- */
-function sync(){
-  const g=id=>document.getElementById(id);
-  g("family_count").value=(+g("adults_count").value||0)+(+g("children_count").value||0);
-  const d=Math.max(+g("stay_days").value||1,1);
-  g("user_daily_budget_inr").value=Math.round((+g("user_budget_total_inr").value||0)/d);
+/* ---------- Smart auto-fill ---------- */
+const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+function sync(from){
+  const ad=+g("adults_count").value||0, ch=+g("children_count").value||0, tot=ad+ch;
+  g("family_count").value=tot;
+  if(from!=="rooms"&&!g("rooms_required").dataset.touched) g("rooms_required").value=Math.max(1,Math.ceil(tot/4));
+  const days=Math.max(+g("stay_days").value||1,1), budget=+g("user_budget_total_inr").value||0;
+  g("user_daily_budget_inr").value=Math.round(budget/days);
+  if(from!=="range") g("budget_range").value=Math.min(Math.max(budget,10000),500000);
+  const d=g("district").value;
+  if(from==="district"||!g("distance_to_sxr_airport_km").dataset.touched){ if(from==="district"||from==="init") g("distance_to_sxr_airport_km").value=DIST[d]; }
+  g("sum").innerHTML=d.split(" (")[0]+" &middot; "+days+" night"+(days>1?"s":"")+" &middot; "+tot+" guest"+(tot>1?"s":"")+"<small>"+fmt(budget/days)+" per night &middot; "+g("rooms_required").value+" room(s)</small>";
 }
-["adults_count","children_count","stay_days","user_budget_total_inr"].forEach(id=>document.getElementById(id).addEventListener("input",sync));
-sync();
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button[data-t],button[data-b]");if(!b)return;
+  if(b.dataset.b){g("user_budget_total_inr").value=b.dataset.b;sync("budget");return}
+  const i=g(b.dataset.t),v=(+i.value||0)+ +b.dataset.d;
+  i.value=Math.min(Math.max(v,+i.min||0),+i.max||999);
+  if(b.dataset.t==="rooms_required")i.dataset.touched=1;
+  sync(b.dataset.t==="rooms_required"?"rooms":"");
+});
+["adults_count","children_count","stay_days","user_budget_total_inr"].forEach(id=>g(id).addEventListener("input",()=>sync()));
+g("rooms_required").addEventListener("input",()=>{g("rooms_required").dataset.touched=1;sync("rooms")});
+g("distance_to_sxr_airport_km").addEventListener("input",e=>e.target.dataset.touched=1);
+g("district").addEventListener("change",()=>{delete g("distance_to_sxr_airport_km").dataset.touched;sync("district")});
+g("budget_range").addEventListener("input",e=>{g("user_budget_total_inr").value=e.target.value;sync("range")});
+sync("init");
 
-/* ---------- Sample data ---------- */
+/* ---------- Sample trips ---------- */
 const examples=[
  {travel_season:"Snow_Winter_Dec_Feb",trip_purpose:"Winter_Ski_Adventure",district:"Baramulla (Gulmarg)",stay_days:2,adults_count:4,children_count:0,rooms_required:1,user_budget_total_inr:65400,star_category:5,has_mountain_or_lake_view:1,distance_to_sxr_airport_km:56.5},
  {travel_season:"Snow_Winter_Dec_Feb",trip_purpose:"Offbeat_Nature_Retreat",district:"Srinagar",stay_days:9,adults_count:3,children_count:0,rooms_required:1,user_budget_total_inr:176400,star_category:3,has_mountain_or_lake_view:1,distance_to_sxr_airport_km:24.2},
  {travel_season:"Peak_Summer_May_Jun",trip_purpose:"Family_Vacation",district:"Anantnag (Pahalgam)",stay_days:7,adults_count:4,children_count:1,rooms_required:2,user_budget_total_inr:122500,star_category:4,has_mountain_or_lake_view:1,distance_to_sxr_airport_km:90}
 ];
-
 let tt;
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
-function loadExample(i){
-  for(const [k,v] of Object.entries(examples[i])){
+function toast(m){const t=g("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
+function setVals(o){
+  for(const [k,v] of Object.entries(o)){
     const radios=document.querySelectorAll('input[type=radio][name="'+k+'"]');
     if(radios.length){radios.forEach(r=>r.checked=(r.value===String(v)));continue}
-    const f=document.getElementById(k);
-    if(f){f.value=String(v);f.classList.remove("flash");void f.offsetWidth;f.classList.add("flash")}
+    const f=g(k);if(f){f.value=String(v);f.classList.remove("flash");void f.offsetWidth;f.classList.add("flash")}
   }
-  sync();
-  toast("Example "+(i+1)+" loaded");
-  document.getElementById("plan").scrollIntoView({behavior:"smooth",block:"start"});
+  sync("rooms");
 }
-function resetForm(){document.getElementById("hotel-form").reset();setTimeout(sync,0);toast("Form reset")}
-document.getElementById("hotel-form").addEventListener("submit",()=>{
-  const b=document.getElementById("submit-btn");b.disabled=true;b.textContent="Predicting...";
+function loadExample(i){setVals(examples[i]);toast("Sample trip loaded");g("plan").scrollIntoView({behavior:"smooth",block:"start"})}
+function resetForm(){g("hotel-form").reset();["rooms_required","distance_to_sxr_airport_km"].forEach(i=>delete g(i).dataset.touched);setTimeout(()=>{sync("init");sync("district")},0);toast("Form reset")}
+
+/* ---------- Submit: remember inputs, show loader ---------- */
+g("hotel-form").addEventListener("submit",()=>{
+  const o={};new FormData(g("hotel-form")).forEach((v,k)=>o[k]=v);
+  try{sessionStorage.setItem("kv_form",JSON.stringify(o))}catch(e){}
+  g("submit-btn").disabled=true;g("submit-btn").textContent="Predicting...";
+  g("loader").classList.remove("hide");
 });
 
-/* ---------- Soft snowfall in the hero ---------- */
+/* ---------- Snowfall ---------- */
 (function snow(){
-  const c=document.getElementById("snow");if(!c||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  const c=g("snow");if(!c||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
   const x=c.getContext("2d");let w,h,f=[];
   function size(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;f=Array.from({length:Math.round(w/14)},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2+.6,s:Math.random()*.7+.25,d:Math.random()*6}))}
   size();addEventListener("resize",size);
-  (function tick(){
-    x.clearRect(0,0,w,h);x.fillStyle="rgba(255,255,255,.8)";
-    f.forEach(p=>{p.y+=p.s;p.d+=.01;p.x+=Math.sin(p.d)*.4;if(p.y>h){p.y=-4;p.x=Math.random()*w}
-      x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()});
-    requestAnimationFrame(tick);
-  })();
+  (function tick(){x.clearRect(0,0,w,h);x.fillStyle="rgba(255,255,255,.8)";
+    f.forEach(p=>{p.y+=p.s;p.d+=.01;p.x+=Math.sin(p.d)*.4;if(p.y>h){p.y=-4;p.x=Math.random()*w}x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()});
+    requestAnimationFrame(tick)})();
 })();
 
-/* ---------- Free photos from Wikimedia Commons (no API key) ---------- */
+/* ---------- Free photos from Wikimedia Commons ---------- */
 (function photos(){
   const credits={};
   const plain=h=>new DOMParser().parseFromString(h||"Unknown","text/html").body.textContent.trim();
   function find(q){
     const key="kv_"+q;
     try{const c=JSON.parse(sessionStorage.getItem(key));if(c&&c.url)return Promise.resolve(c)}catch(e){}
-    const api="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(q)
-      +"&gsrnamespace=6&gsrlimit=25&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=1400&format=json&origin=*";
+    const api="https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch="+encodeURIComponent(q)+"&gsrnamespace=6&gsrlimit=25&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiurlwidth=1400&format=json&origin=*";
     return fetch(api).then(r=>r.json()).then(d=>{
-      const ok=Object.values((d.query&&d.query.pages)||{}).filter(p=>{
-        const i=p.imageinfo&&p.imageinfo[0];
-        return i&&i.mime==="image/jpeg"&&i.width>=1200&&i.width>i.height&&!/map|flag|logo|coat|stamp|poster|diagram|panorama/i.test(p.title);
-      });
+      const ok=Object.values((d.query&&d.query.pages)||{}).filter(p=>{const i=p.imageinfo&&p.imageinfo[0];return i&&i.mime==="image/jpeg"&&i.width>=1200&&i.width>i.height&&!/map|flag|logo|coat|stamp|poster|diagram|panorama/i.test(p.title)});
       if(!ok.length)return null;
       const i=ok[Math.floor(Math.random()*Math.min(ok.length,8))].imageinfo[0],m=i.extmetadata||{};
       const p={url:i.thumburl||i.url,page:i.descriptionurl,artist:plain(m.Artist&&m.Artist.value),lic:plain(m.LicenseShortName&&m.LicenseShortName.value)};
@@ -372,32 +404,22 @@ document.getElementById("hotel-form").addEventListener("submit",()=>{
       return p;
     }).catch(()=>null);
   }
-  function credit(name,p){
-    credits[name]=p;
-    document.getElementById("credits").innerHTML="Photos via Wikimedia Commons: "+Object.entries(credits).map(([n,p])=>
-      '<a target="_blank" rel="noopener" href="'+p.page+'">'+n+'</a> ('+p.artist.replace(/</g,"&lt;")+", "+p.lic+")").join("; ");
-  }
+  function credit(n,p){credits[n]=p;g("credits").innerHTML="Photos via Wikimedia Commons: "+Object.entries(credits).map(([n,p])=>'<a target="_blank" rel="noopener" href="'+p.page+'">'+n+'</a> ('+p.artist.replace(/</g,"&lt;")+", "+p.lic+")").join("; ")}
   function load(p,done){const im=new Image();im.onload=()=>done(im);im.src=p.url}
-
-  find("Dal Lake Srinagar mountains").then(p=>{
-    if(!p)return;
-    load(p,()=>{const b=document.getElementById("hero-bg");b.style.backgroundImage="url('"+p.url+"')";b.classList.add("on");credit("Dal Lake",p)});
-  });
-  document.querySelectorAll(".tile").forEach(t=>{
-    find(t.dataset.q).then(p=>{
-      if(!p)return;
-      load(p,im=>{im.alt=t.textContent.trim();t.prepend(im);requestAnimationFrame(()=>im.classList.add("on"));credit(t.textContent.trim(),p)});
-    });
-  });
+  find("Dal Lake Srinagar mountains").then(p=>{if(!p)return;load(p,()=>{const b=g("hero-bg");b.style.backgroundImage="url('"+p.url+"')";b.classList.add("on");credit("Dal Lake",p)})});
+  document.querySelectorAll(".tile").forEach(t=>{find(t.dataset.q).then(p=>{if(!p)return;load(p,im=>{im.alt=t.textContent.trim();t.prepend(im);requestAnimationFrame(()=>im.classList.add("on"));credit(t.textContent.trim(),p)})})});
 })();
 
-/* ---------- Show the result or error box only if Flask filled it ---------- */
+/* ---------- Show result or error only if Flask filled it ---------- */
 (function showResult(){
   const clean=s=>{s=s.trim();return s==="None"?"":s};
-  const pred=clean(document.getElementById("pred-text").textContent);
-  const err=clean(document.getElementById("err-text").textContent);
-  const box=err?document.getElementById("result-err"):(pred?document.getElementById("result-ok"):null);
-  if(box){box.classList.remove("hide");box.scrollIntoView({behavior:"smooth",block:"center"})}
+  const pred=clean(g("pred-text").textContent), err=clean(g("err-text").textContent);
+  const box=err?g("result-err"):(pred?g("result-ok"):null);
+  if(box){
+    box.classList.remove("hide");
+    try{const o=JSON.parse(sessionStorage.getItem("kv_form"));if(o){g("rooms_required").dataset.touched=1;g("distance_to_sxr_airport_km").dataset.touched=1;setVals(o)}}catch(e){}
+    box.scrollIntoView({behavior:"smooth",block:"center"});
+  }
 })();
 </script>
 </body>

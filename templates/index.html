@@ -229,6 +229,10 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
 .ph.big{grid-row:span 2;aspect-ratio:auto;min-height:230px}
 .ph figcaption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:38px 14px 12px;color:#fff;font-family:var(--serif);font-weight:700;font-size:1.15rem;line-height:1.2;background:linear-gradient(transparent,rgba(7,29,38,.92))}
 .ph{position:relative;aspect-ratio:4/3;border-radius:6px 16px 6px 16px;overflow:hidden;background:linear-gradient(135deg,var(--lake2),var(--crocus))}
+.alts{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.alts b{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);width:100%}
+.alts span{font-weight:700;font-size:.9rem;padding:7px 14px;border-radius:12px;border:1px solid var(--line);background:var(--snow)}
+.alts i{font-style:normal;color:var(--crocus);margin-left:6px}
 .hnote{margin:8px 0 0;font-size:.74rem;color:var(--muted)}
 </style>
 </head>
@@ -245,7 +249,7 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
     <p class="greet">Khush amdeed &middot; Welcome to Kashmir</p>
     <h1>Find your <em>perfect stay</em> in the Valley</h1>
     <p class="sub">Answer a few simple questions. Our decision-tree model will suggest the hotel that fits your trip.</p>
-    <div class="stats"><div><b>10</b><span>Districts</span></div><div><b>13</b><span>Inputs, most auto-filled</span></div><div><b>1 tap</b><span>Sample trips</span></div></div>
+    <div class="stats"><div><b>10</b><span>Districts</span></div><div><b>14</b><span>Simple inputs</span></div><div><b>1 tap</b><span>Sample trips</span></div></div>
     <a class="cta" href="#plan">Plan my trip</a>
   </div>
   <svg class="ridge" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true">
@@ -263,6 +267,8 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
         <div class="pred" id="pred-text">{{ prediction }}</div>
         <p class="small">Predicted label returned by AI Model</p>
         <div class="tk" id="tk"></div>
+        <div class="alts" id="alts-box"></div>
+        <ul class="hide" id="alts-src">{% for n, p in alts %}<li data-p="{{ p }}">{{ n }}</li>{% endfor %}</ul>
         <div class="hp" id="hp"></div><p class="hnote" id="hnote"></p>
       </div>
       <div class="tstub"><div class="seal">&#10003;</div><button class="pbtn" type="button" onclick="window.print()">Print / Save</button></div>
@@ -305,7 +311,7 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
       <div class="nav"><button class="back hide" id="back" type="button">&larr; Back</button><button class="go" id="next" type="button">Next &rarr;</button><button class="go hide" id="submit-btn" type="submit">Predict my hotel &rarr;</button></div>
     </div>
   </form>
-  <p class="note">The form sends every field to Flask. Flask encodes the text fields with ohe.pkl and runs the decision tree.</p>
+  <p class="note">The form sends every field to Flask. Flask passes them to the trained model (hotel_model.pkl), which returns the best match and two alternatives.</p>
 </main>
 
 <footer>
@@ -319,7 +325,9 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
 
 <script>
 /* ---------- Options ---------- */
-const YN=[["1","Yes","I want a view"],["0","No","Not needed"]];
+const YN=[["1","Yes","Needed"],["0","No","Not needed"]];
+const PROPS=[["Boutique_Cottage","Boutique cottage"],["Luxury_Resort","Luxury resort"],["JKTDC_Tourist_Bungalow","JKTDC bungalow"],["Hotel","Hotel"],["Valley_Homestay","Valley homestay"],["Heritage_Houseboat","Heritage houseboat"]];
+const DIETS=[["Multi_Cuisine","Multi cuisine"],["Continental_Halal","Continental / Halal"],["Kashmiri_Wazwan","Kashmiri Wazwan"],["Pure_Veg_Jain","Pure veg / Jain"]];
 const SEASON=[["Snow_Winter_Dec_Feb","Snow winter","Dec to Feb"],["Lush_Monsoon_Jul_Aug","Lush monsoon","Jul to Aug"],["Chinar_Autumn_Sep_Nov","Chinar autumn","Sep to Nov"],["Peak_Summer_May_Jun","Peak summer","May to Jun"],["Tulip_Spring_Mar_Apr","Tulip spring","Mar to Apr"]];
 const PURPOSE=[["Winter_Ski_Adventure","Ski adventure"],["Senior_Leisure_Tour","Senior leisure"],["Family_Vacation","Family vacation"],["Offbeat_Nature_Retreat","Nature retreat"],["Alpine_Trekking","Alpine trekking"],["Honeymoon_Couple","Honeymoon"]];
 const STARS=[["5","5 star"],["4","4 star"],["3","3 star"],["2","2 star"],["1","1 star"],["0","Unrated"]];
@@ -332,13 +340,15 @@ const SECTIONS=[
   ["district","District / destination","s",{opts:Object.keys(DIST),full:1}],["stay_days","Nights of stay","c",{min:1,max:60},3]]},
  {t:"Who is travelling",d:"Group size and rooms",ic:"M12 3l9 5v2H3V8l9-5zm-7 9h2v6H5zm6 0h2v6h-2zm6 0h2v6h-2zM3 20h18v2H3z",f:[
   ["adults_count","Adults","c",{min:1,max:30},2],["children_count","Children","c",{min:0,max:30},0],
-  ["family_count","Total guests","n",{min:1,ro:1,tag:"auto"},2],["rooms_required","Rooms required","c",{min:1,max:15,tag:"auto",hint:"Suggested: 1 room for every 4 guests. Change it if you like."},1]]},
+  ["seniors_count","Seniors","c",{min:0,max:30},0],["rooms_required","Rooms required","c",{min:1,max:15,tag:"auto",hint:"Suggested: 1 room for every 4 guests. Change it if you like."},1]]},
  {t:"Budget",d:"What you plan to spend",ic:"M12 2c3 4 6 6 6 10a6 6 0 01-12 0c0-2 1-3 2-5 1 2 2 2 3 2 0-3 0-5 1-7z",f:[
-  ["user_budget_total_inr","Total budget","b",{pre:"₹",min:0,two:1},60000],["user_daily_budget_inr","Daily budget","n",{pre:"₹",min:0,ro:1,tag:"auto",hint:"Total budget divided by nights."},20000]]},
- {t:"Stay preferences",d:"Quality, view and distance",ic:"M3 21V9l9-6 9 6v12h-6v-6H9v6H3z",f:[
+  ["user_budget_total_inr","Total budget","b",{pre:"₹",min:0,two:1},60000]]},
+ {t:"Stay preferences",d:"Property, food and comfort",ic:"M3 21V9l9-6 9 6v12h-6v-6H9v6H3z",f:[
+  ["preferred_property_type","Preferred property type","r",{opts:PROPS,full:1,sel:"Boutique_Cottage"}],
   ["star_category","Star category","r",{opts:STARS,full:1,sel:"3"}],
-  ["has_mountain_or_lake_view","Mountain / lake view","r",{opts:YN,sel:"1"}],
-  ["distance_to_sxr_airport_km","Distance to SXR airport","n",{suf:"km",min:0,tag:"auto",hint:"Approximate, filled from your district."},25]]}
+  ["dietary_preference","Food preference","r",{opts:DIETS,full:1,sel:"Multi_Cuisine"}],
+  ["requires_central_heating","Central heating / bukhari needed","r",{opts:YN,sel:"1"}],
+  ["requires_scenic_view","Scenic view needed","r",{opts:YN,sel:"1"}]]}
 ];
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
 const g=id=>document.getElementById(id);
@@ -407,14 +417,11 @@ show(0,true);
 /* ---------- Smart auto-fill ---------- */
 const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
 function sync(from){
-  const ad=+g("adults_count").value||0, ch=+g("children_count").value||0, tot=ad+ch;
-  g("family_count").value=tot;
+  const ad=+g("adults_count").value||0, ch=+g("children_count").value||0, sen=+g("seniors_count").value||0, tot=ad+ch+sen;
   if(from!=="rooms"&&!g("rooms_required").dataset.touched) g("rooms_required").value=Math.max(1,Math.ceil(tot/4));
   const days=Math.max(+g("stay_days").value||1,1), budget=+g("user_budget_total_inr").value||0;
-  g("user_daily_budget_inr").value=Math.round(budget/days);
   if(from!=="range") g("budget_range").value=Math.min(Math.max(budget,10000),500000);
   const d=g("district").value;
-  if(from==="district"||!g("distance_to_sxr_airport_km").dataset.touched){ if(from==="district"||from==="init") g("distance_to_sxr_airport_km").value=DIST[d]; }
   g("sum").innerHTML=d.split(" (")[0]+" &middot; "+days+" night"+(days>1?"s":"")+" &middot; "+tot+" guest"+(tot>1?"s":"")+"<small>"+fmt(budget/days)+" per night &middot; "+g("rooms_required").value+" room(s)</small>";
   markDistrict();tint();
 }
@@ -426,18 +433,17 @@ document.addEventListener("click",e=>{
   if(b.dataset.t==="rooms_required")i.dataset.touched=1;
   sync(b.dataset.t==="rooms_required"?"rooms":"");
 });
-["adults_count","children_count","stay_days","user_budget_total_inr"].forEach(id=>g(id).addEventListener("input",()=>sync()));
+["adults_count","children_count","seniors_count","stay_days","user_budget_total_inr"].forEach(id=>g(id).addEventListener("input",()=>sync()));
 g("rooms_required").addEventListener("input",()=>{g("rooms_required").dataset.touched=1;sync("rooms")});
-g("distance_to_sxr_airport_km").addEventListener("input",e=>e.target.dataset.touched=1);
-g("district").addEventListener("change",()=>{delete g("distance_to_sxr_airport_km").dataset.touched;sync("district")});
+g("district").addEventListener("change",()=>{sync("district")});
 g("budget_range").addEventListener("input",e=>{g("user_budget_total_inr").value=e.target.value;sync("range")});
 sync("init");
 
 /* ---------- Sample trips ---------- */
 const examples=[
- {travel_season:"Snow_Winter_Dec_Feb",trip_purpose:"Winter_Ski_Adventure",district:"Baramulla (Gulmarg)",stay_days:2,adults_count:4,children_count:0,rooms_required:1,user_budget_total_inr:65400,star_category:5,has_mountain_or_lake_view:1,distance_to_sxr_airport_km:56.5},
- {travel_season:"Snow_Winter_Dec_Feb",trip_purpose:"Offbeat_Nature_Retreat",district:"Srinagar",stay_days:9,adults_count:3,children_count:0,rooms_required:1,user_budget_total_inr:176400,star_category:3,has_mountain_or_lake_view:1,distance_to_sxr_airport_km:24.2},
- {travel_season:"Peak_Summer_May_Jun",trip_purpose:"Family_Vacation",district:"Anantnag (Pahalgam)",stay_days:7,adults_count:4,children_count:1,rooms_required:2,user_budget_total_inr:122500,star_category:4,has_mountain_or_lake_view:1,distance_to_sxr_airport_km:90}
+ {travel_season:"Snow_Winter_Dec_Feb",trip_purpose:"Winter_Ski_Adventure",district:"Baramulla (Gulmarg)",stay_days:2,adults_count:4,children_count:0,rooms_required:1,user_budget_total_inr:65400,star_category:5,seniors_count:0,preferred_property_type:"Boutique_Cottage",dietary_preference:"Multi_Cuisine",requires_central_heating:1,requires_scenic_view:1},
+ {travel_season:"Snow_Winter_Dec_Feb",trip_purpose:"Offbeat_Nature_Retreat",district:"Srinagar",stay_days:9,adults_count:3,children_count:0,rooms_required:1,user_budget_total_inr:176400,star_category:3,seniors_count:0,preferred_property_type:"Valley_Homestay",dietary_preference:"Kashmiri_Wazwan",requires_central_heating:1,requires_scenic_view:0},
+ {travel_season:"Peak_Summer_May_Jun",trip_purpose:"Family_Vacation",district:"Anantnag (Pahalgam)",stay_days:7,adults_count:4,children_count:1,rooms_required:2,user_budget_total_inr:122500,star_category:4,seniors_count:0,preferred_property_type:"Hotel",dietary_preference:"Continental_Halal",requires_central_heating:0,requires_scenic_view:1}
 ];
 let tt;
 function toast(m){const t=g("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("show"),2200)}
@@ -450,7 +456,7 @@ function setVals(o){
   sync("rooms");
 }
 function loadExample(i){setVals(examples[i]);toast("Sample loaded. Review and press Predict");show(steps.length-1)}
-function resetForm(){g("hotel-form").reset();["rooms_required","distance_to_sxr_airport_km"].forEach(i=>delete g(i).dataset.touched);setTimeout(()=>{sync("init");sync("district")},0);show(0);toast("Form reset")}
+function resetForm(){g("hotel-form").reset();["rooms_required"].forEach(i=>delete g(i).dataset.touched);setTimeout(()=>{sync("init");sync("district")},0);show(0);toast("Form reset")}
 
 /* ---------- Submit: remember inputs, show loader ---------- */
 g("hotel-form").addEventListener("submit",()=>{
@@ -558,12 +564,14 @@ addEventListener("pageshow",e=>{if(e.persisted){g("loader").classList.add("hide"
   const box=err?g("result-err"):(pred?g("result-ok"):null);
   if(!box)return;
   box.classList.remove("hide");
+  const al=[...document.querySelectorAll("#alts-src li")];
+  if(al.length)g("alts-box").innerHTML="<b>Other good matches (match score)</b>"+al.map(x=>"<span>"+esc(x.textContent)+"<i>"+esc(x.dataset.p)+"%</i></span>").join("");
   try{
     const o=JSON.parse(sessionStorage.getItem("kv_form"));
     if(o){
-      g("rooms_required").dataset.touched=1;g("distance_to_sxr_airport_km").dataset.touched=1;setVals(o);
+      g("rooms_required").dataset.touched=1;setVals(o);
       const d=Math.max(+o.stay_days||1,1),sn=(SEASON.find(x=>x[0]===o.travel_season)||[])[1];
-      g("tk").innerHTML=[o.district.split(" (")[0]===o.district?o.district:o.district.replace(/.*\((.*)\)/,"$1"),d+" night"+(d>1?"s":""),o.family_count+" guests",fmt(o.user_budget_total_inr/d)+" / night",sn].filter(Boolean).map(t=>"<span>"+esc(t)+"</span>").join("");
+      g("tk").innerHTML=[o.district.split(" (")[0]===o.district?o.district:o.district.replace(/.*\((.*)\)/,"$1"),d+" night"+(d>1?"s":""),((+o.adults_count||0)+(+o.children_count||0)+(+o.seniors_count||0))+" guests",fmt(o.user_budget_total_inr/d)+" / night",sn].filter(Boolean).map(t=>"<span>"+esc(t)+"</span>").join("");
     }
   }catch(e){}
   box.scrollIntoView({behavior:"smooth",block:"center"});

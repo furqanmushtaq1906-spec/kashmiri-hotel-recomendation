@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kashmir Hotel Recommendation | Created by Furqan Mushtaq</title>
+<meta name="description" content="Kashmir Stays — personalised hotel recommendations across Kashmir. Created by Furqan Mushtaq.">
+<title>Kashmir Stays | Hotel Recommendation System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Marck+Script&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -234,6 +235,133 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
 .alts span{font-weight:700;font-size:.9rem;padding:7px 14px;border-radius:12px;border:1px solid var(--line);background:var(--snow)}
 .alts i{font-style:normal;color:var(--crocus);margin-left:6px}
 .hnote{margin:8px 0 0;font-size:.74rem;color:var(--muted)}
+
+/* ===== Wadi Fare-inspired visual refresh ===== */
+:root{
+  --deep:#0b2533;--lake:#1c6b86;--lake2:#2a829b;--snow:#eef4f6;
+  --mist:#dce9ee;--ink:#12303d;--muted:#5d7783;--saffron:#e8a33d;
+  --crocus:#1c6b86;--crocus2:#124b62;--chinar:#c4452d;--line:#d6e4ea;
+  --surface:#fff;--ok:#18734d;--err:#c4452d;
+}
+[data-theme="dark"]{
+  --deep:#06131b;--lake:#164e65;--lake2:#236b83;--snow:#08151d;
+  --mist:#102a37;--ink:#e6f1f5;--muted:#8fb0bd;--line:#1f3a49;
+  --surface:#10232e;--ok:#62d6a0;--err:#ff9b82;
+}
+body{background:var(--snow);color:var(--ink)}
+.hero{
+  min-height:560px;
+  background:
+    radial-gradient(ellipse at 82% 10%,rgba(232,163,61,.28),transparent 45%),
+    linear-gradient(135deg,var(--deep),var(--lake));
+}
+.hero::before{
+  background:
+    linear-gradient(180deg,rgba(5,20,28,.15),rgba(5,20,28,.25) 42%,rgba(5,20,28,.88)),
+    radial-gradient(#fff 1px,transparent 1.5px);
+  background-size:auto,46px 46px;
+  opacity:.75;
+}
+.hero .wrap{padding:38px 20px 150px}
+.topbar{max-width:1060px}
+.brand{
+  font-family:var(--sans);font-size:.9rem;letter-spacing:.22em;
+  font-weight:800;color:#ffe0a1
+}
+.brand svg{color:var(--saffron)}
+.top-actions{display:flex;align-items:center;gap:12px}
+.theme-btn{
+  border:1px solid rgba(255,255,255,.38);border-radius:999px;
+  background:rgba(255,255,255,.10);color:#fff;padding:9px 15px;
+  font:600 .82rem var(--sans);backdrop-filter:blur(8px)
+}
+.theme-btn:hover{background:rgba(255,255,255,.2)}
+.by{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
+.greet{
+  font-family:var(--sans);font-size:.78rem;letter-spacing:.19em;
+  font-weight:800;color:#ffe0a1;margin:55px 0 15px
+}
+.hero h1{
+  max-width:850px;font-family:var(--serif);
+  font-size:clamp(2.6rem,6.5vw,5rem);line-height:1.04
+}
+.hero h1 em{color:#ffe0a1}
+.sub{font-size:1rem;max-width:600px;color:#d8e8ed}
+.stats div{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
+.stats b{color:#ffe0a1}
+.cta{
+  background:var(--saffron);color:#2b2112;
+  border-radius:12px;box-shadow:0 10px 26px rgba(232,163,61,.24)
+}
+.ridge{height:110px}
+main.wrap{max-width:1020px}
+.result,fieldset,.qcard,.tile,.bar{
+  border-radius:20px;box-shadow:var(--shadow,0 12px 34px rgba(11,37,51,.10))
+}
+.result{border:1px solid var(--line);border-top:4px solid var(--saffron)}
+.result::after{opacity:.12}
+.seal{background:linear-gradient(135deg,var(--lake),var(--lake2));box-shadow:0 0 0 7px rgba(28,107,134,.14)}
+.result.error .seal{background:var(--chinar)}
+.pred{color:var(--lake)}
+.intro{padding-top:42px}
+h2.title{font-family:var(--serif);color:var(--ink)}
+p.lead{color:var(--muted)}
+.tile{border-radius:16px}
+.qcard{
+  border:1px solid var(--line);border-radius:16px;
+  background:var(--surface);box-shadow:0 8px 22px rgba(11,37,51,.07)
+}
+.qcard::before{background:linear-gradient(var(--saffron),var(--lake))}
+.qcard em{color:var(--lake)}
+fieldset{
+  border:1px solid var(--line);border-radius:18px;background:var(--surface)
+}
+.fhead{
+  background:
+    radial-gradient(circle at 20% 50%,rgba(232,163,61,.15) 0 2px,transparent 3px) 0 0/26px 26px,
+    linear-gradient(100deg,var(--deep),var(--lake) 78%)
+}
+.fhead .n{background:var(--saffron);color:#2b2112}
+.lab{color:var(--muted)}
+input[type=number],select{
+  background:var(--snow);color:var(--ink);border-color:var(--line);border-radius:11px
+}
+input[type=number]:focus,select:focus{outline:2px solid rgba(28,107,134,.2);border-color:var(--lake)}
+.opt input:checked+span{
+  background:linear-gradient(135deg,var(--lake),var(--crocus2));
+  box-shadow:0 8px 18px rgba(28,107,134,.24)
+}
+.opt span{border-radius:11px}
+.cnt{border-radius:11px;background:var(--snow)}
+.cnt button{color:var(--lake)}
+input[type=range]{accent-color:var(--lake)}
+.qb button{border-radius:9px}
+.bar{
+  border-radius:16px;background:color-mix(in srgb,var(--surface) 92%,transparent);
+  border-color:var(--line)
+}
+.go{
+  background:linear-gradient(135deg,var(--lake),var(--crocus2));
+  border-radius:11px;box-shadow:0 9px 22px rgba(28,107,134,.25)
+}
+.back{border-radius:11px}
+footer{background:var(--deep)}
+footer .sign{border-color:rgba(232,163,61,.45)}
+footer .sign strong{color:#ffe0a1}
+#toast{background:var(--deep);border-color:var(--saffron)}
+#loader{background:rgba(5,20,28,.9)}
+@media(max-width:600px){
+  .hero{min-height:570px}
+  .hero .wrap{padding-bottom:125px}
+  .top-actions .by{display:none}
+  .theme-btn{padding:8px 11px}
+  .greet{font-size:.68rem;letter-spacing:.12em}
+  .stats div{padding:9px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-bg{animation:none}
+}
+
 </style>
 </head>
 <body>
@@ -242,14 +370,14 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
   <div class="hero-bg" id="hero-bg"></div>
   <canvas id="snow" aria-hidden="true"></canvas>
   <div class="topbar">
-    <div class="brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg>Kashmir Stays</div>
-    <div class="by">Created by <b>Furqan Mushtaq</b></div>
+    <div class="brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg>KASHMIR STAYS</div>
+    <div class="top-actions"><div class="by">Created by <b>Furqan Mushtaq</b></div><button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle colour theme">🌙 Dark</button></div>
   </div>
   <div class="wrap">
-    <p class="greet">Khush amdeed &middot; Welcome to Kashmir</p>
-    <h1>Find your <em>perfect stay</em> in the Valley</h1>
-    <p class="sub">Answer a few simple questions. Our decision-tree model will suggest the hotel that fits your trip.</p>
-    <div class="stats"><div><b>10</b><span>Districts</span></div><div><b>14</b><span>Simple inputs</span></div><div><b>1 tap</b><span>Sample trips</span></div></div>
+    <p class="greet">KHUSH AMDEED · WELCOME TO KASHMIR</p>
+    <h1>Discover your <em>perfect stay</em> in Kashmir.</h1>
+    <p class="sub">Tell us about your journey, budget and preferences. Our machine-learning model will recommend a stay that suits your trip.</p>
+    <div class="stats"><div><b>10</b><span>Kashmir districts</span></div><div><b>367</b><span>Hotels in the dataset</span></div><div><b>1 tap</b><span>Get a recommendation</span></div></div>
     <a class="cta" href="#plan">Plan my trip</a>
   </div>
   <svg class="ridge" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true">
@@ -285,8 +413,8 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
 
   <section class="intro">
     <div class="buta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg></div>
-    <h2 class="title">Houseboats, cottages and snow-lit ridges</h2>
-    <p class="lead">From shikaras on Dal Lake to the meadows of Gulmarg, every stay in Kashmir has a story.</p>
+    <h2 class="title">Find a stay that fits your Kashmir trip</h2>
+    <p class="lead">Explore stays around Dal Lake, Gulmarg, Pahalgam, Sonamarg and more — then personalise your recommendation.</p>
     <div class="gallery">
       <figure class="tile" data-q="Dal Lake Srinagar shikara" data-m="dal|shikara|houseboat|lake"><figcaption>Dal Lake</figcaption></figure>
       <figure class="tile" data-q="Gulmarg snow mountains" data-m="gulmarg"><figcaption>Gulmarg</figcaption></figure>
@@ -302,7 +430,7 @@ footer b.t{position:relative;font-family:var(--serif);font-size:1.5rem;color:#ff
     <button class="ghost" type="button" onclick="resetForm()">Reset form</button>
   </section>
 
-  <div class="formhead" id="plan"><div class="buta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg></div><h2 class="title">Plan your trip</h2><p class="lead">Four short steps. Fields marked AUTO are worked out for you.</p></div>
+  <div class="formhead" id="plan"><div class="buta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4 2 7 6 6 10-1 3-4 4-4 7 0 1 .5 2 1 3-5 0-10-3-10-9 0-5 3-9 7-11z"/></svg></div><h2 class="title">Plan your stay</h2><p class="lead">Complete the four steps below to get your hotel recommendation.</p></div>
 
   <form id="hotel-form" method="POST" action="">
     <div class="prog" id="prog"></div><div id="fields"></div>
@@ -577,6 +705,29 @@ addEventListener("pageshow",e=>{if(e.persisted){g("loader").classList.add("hide"
   box.scrollIntoView({behavior:"smooth",block:"center"});
   if(box.id==="result-ok"){confetti();hotelPhotos(pred)}
 })();
+
+/* ---------- Light / dark theme toggle (Wadi Fare style) ---------- */
+(function(){
+  const btn=document.getElementById("themeBtn");
+  if(!btn)return;
+  let saved=null;
+  try{saved=localStorage.getItem("kashmir-stays-theme")}catch(e){}
+  const initial=saved==="dark"?"dark":"light";
+  document.documentElement.setAttribute("data-theme",initial);
+  function paint(){
+    const dark=document.documentElement.getAttribute("data-theme")==="dark";
+    btn.textContent=dark?"☀️ Light":"🌙 Dark";
+    btn.setAttribute("aria-label",dark?"Switch to light theme":"Switch to dark theme");
+  }
+  btn.addEventListener("click",()=>{
+    const next=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+    document.documentElement.setAttribute("data-theme",next);
+    try{localStorage.setItem("kashmir-stays-theme",next)}catch(e){}
+    paint();
+  });
+  paint();
+})();
+
 </script>
 </body>
 </html>
